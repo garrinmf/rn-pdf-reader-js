@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Page, setOptions, Document } from 'react-pdf'
+import { pdfjs, Page, setOptions, Document } from 'react-pdf/dist/entry.webpack'
 import raf, { cancel } from 'raf'
 import Plus from './components/Plus'
 import Minus from './components/Minus'
@@ -10,13 +10,7 @@ import './Reader.less'
 
 const ReactContainer = document.querySelector('#react-container')
 
-setOptions({
-  workerSrc:
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.305/pdf.worker.min.js',
-  disableWorker: false,
-  cMapUrl: 'https://github.com/mozilla/pdfjs-dist/raw/master/cmaps/',
-  cMapPacked: true,
-})
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 class Reader extends Component {
   state = {
